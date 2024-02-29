@@ -7,7 +7,7 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
-    alb.ingress.kubernetes.io/healthcheck-path: /ok
+    alb.ingress.kubernetes.io/healthcheck-path: /
 spec:
   ingressClassName: alb
   rules:
@@ -21,6 +21,9 @@ spec:
                  name: api
                  port:   
                    number: 3500
+               healthCheck:
+                 path: /ok
+                 port: 3500
            - path: /
              pathType: Prefix
              backend:
